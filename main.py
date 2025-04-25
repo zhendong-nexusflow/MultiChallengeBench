@@ -71,6 +71,10 @@ def main():
     parser = ResultParser(evaluation_results)
     scores = parser.calculate_scores()
 
+    output_dir = os.path.dirname(args.output_file)
+    if output_dir and not os.path.exists(output_dir):
+        os.makedirs(output_dir, exist_ok=True)
+
     # Save summary scores
     with open(args.output_file, 'w') as f:
         f.write(f"Attempts: {args.attempts} Overall Score: {scores['overall_score']:.2f}%\n")
